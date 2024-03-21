@@ -36,13 +36,11 @@ public class AnagramProcessor {
             int wordSize = currentLine.length();
             while (!endOfFile(currentLine) && validateWord(currentLine, wordSize)) {
                 String hashKey = createHashKey(currentLine);
-                StringBuffer value = anagramGroups.getOrDefault(hashKey, new StringBuffer());
-                value.append(currentLine).append(DELIMITER);
-                anagramGroups.put(hashKey, value);
+                appendToAnagramGroups(hashKey, currentLine);
                 currentLine = reader.readLine();
             }
-            anagramsWriter.writeAnagrams(anagramGroups);
-            anagramGroups.clear();
+            writeAnagrams();
+           clearAnagramGroups();
         }
     }
 
@@ -59,5 +57,18 @@ public class AnagramProcessor {
         char[] chars = inputLine.toCharArray();
         Arrays.sort(chars);
         return String.valueOf(chars);
+    }
+    private void appendToAnagramGroups(String hashKey, String line) {
+        StringBuffer value = anagramGroups.getOrDefault(hashKey, new StringBuffer());
+        value.append(line).append(DELIMITER);
+        anagramGroups.put(hashKey, value);
+    }
+
+    private void writeAnagrams() {
+        anagramsWriter.writeAnagrams(anagramGroups);
+    }
+
+    private void clearAnagramGroups() {
+        anagramGroups.clear();
     }
 }
