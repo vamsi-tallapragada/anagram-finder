@@ -30,7 +30,7 @@ public class AnagramProcessor {
         }
     }
 
-    private void processInputFile(BufferedReader reader) throws IOException {
+    private void processInputFile(final BufferedReader reader) throws IOException {
         String currentLine = reader.readLine();
         while (!endOfFile(currentLine)) {
             int wordSize = currentLine.length();
@@ -46,16 +46,16 @@ public class AnagramProcessor {
         }
     }
 
-    private boolean validateWord(String inputWord, int wordSize) {
+    private boolean validateWord(final String inputWord, final int wordSize) {
         return inputWord.length() == wordSize;
     }
 
-    private boolean endOfFile(String inputLine) {
+    private boolean endOfFile(final String inputLine) {
         return inputLine == null;
     }
 
 
-    private String createHashKey(String inputLine) {
+    private String createHashKey(final String inputLine) {
         char[] chars = inputLine.toCharArray();
         Arrays.sort(chars);
         return String.valueOf(chars);

@@ -19,9 +19,14 @@ public class AnagramCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(final String... args) throws IOException {
+        final File file = validateInputFile(args);
+        anagramProcessor.processAnagrams(file);
+    }
+
+    private File validateInputFile(final String[] args) {
         Assert.isTrue(args.length == 1, "Please ensure that the input file is provided");
         final File file = new File(args[0]);
         Assert.isTrue(file.exists(), args[0] + " Does not exist");
-        anagramProcessor.processAnagrams(file);
+        return file;
     }
 }

@@ -9,14 +9,14 @@ import java.util.HashMap;
 @Component
 @Slf4j
 public class OutputWriter {
-    public void writeAnagrams(HashMap<String, StringBuffer> anagramGroups) {
+    public void writeAnagrams(final HashMap<String, StringBuffer> anagramGroups) {
         for (String key : anagramGroups.keySet()) {
             String anagrams = trim(anagramGroups.get(key).toString());
             System.out.println(anagrams);
         }
     }
 
-    private String trim(String data) {
+    private String trim(final String data) {
         return data.substring(0, data.length() - 1);
     }
 
