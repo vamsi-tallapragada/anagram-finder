@@ -31,15 +31,15 @@ public class AnagramProcessor {
     }
 
     private void processInputFile(BufferedReader reader) throws IOException {
-        String inputWord = reader.readLine();
-        while (!endOfFile(inputWord)) {
-            int wordSize = inputWord.length();
-            while (!endOfFile(inputWord) && validateWord(inputWord, wordSize)) {
-                String hashKey = createHashKey(inputWord);
+        String currentLine = reader.readLine();
+        while (!endOfFile(currentLine)) {
+            int wordSize = currentLine.length();
+            while (!endOfFile(currentLine) && validateWord(currentLine, wordSize)) {
+                String hashKey = createHashKey(currentLine);
                 StringBuffer value = anagramGroups.getOrDefault(hashKey, new StringBuffer());
-                value.append(inputWord).append(DELIMITER);
+                value.append(currentLine).append(DELIMITER);
                 anagramGroups.put(hashKey, value);
-                inputWord = reader.readLine();
+                currentLine = reader.readLine();
             }
             anagramsWriter.writeAnagrams(anagramGroups);
             anagramGroups.clear();
